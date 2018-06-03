@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+rss_example.xml === Example RSS feed template for Scissors.
+
+Copyright (C) 2017-2018  Göktuğ Kayaalp <self@gkayaalp.com>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+This is the RSS template I use for <https://www.gkayaalp.com/>.  It
+should be possible to use this changing only the URLs to produce a
+valid RSS feed.
+-->
+<rss version="2.0">
+  <channel>
+    <!-- Information specific to each blog comes from @data[:blog].
+         This template is used once for each blog. -->
+    <title><%= @data[:blog][:name] %></title>
+    <description><%= @data[:blog][:description] %></description>
+    <link>http://www.gkayaalp.com/blog/index.html</link>
+    <lastBuildDate><%= DateTime.now.rfc822 %></lastBuildDate>
+    <pubDate><%= DateTime.now.rfc822 %></pubDate>
+    <ttl>1800</ttl>
+    <!-- data[:posts] is a list of all the posts in the blog. -->
+    <% data[:posts].each do |post| %>
+    <item>
+      <title><%= post[:title] %></title>
+      <description>
+	<![CDATA[<html><body><p>
+  		 <%= post[:content] %>
+  		 </html></body>]]>
+      </description>
+      <link>http://www.gkayaalp.com/<%= post[:link] %></link>
+      <guid isPermaLink="true">http://www.gkayaalp.com/<%= post[:link] %></guid>
+      <pubDate><%= post[:date].rfc822 %></pubDate>
+    </item>
+    <% end %>
+  </channel>
+</rss>

@@ -1,0 +1,75 @@
+#+title: Scissors
+#+description: Cut your Textile into a nice website.
+#+options: toc:nil
+
+#+BEGIN_QUOTE
+*BEWARE ALPHA SOFTWARE!*
+
+I use this library for my own website w/o problems, but it has not
+been tested with different setups yet, and is not complete.  Use at
+your own risk.  That said, the source code is rather brief, so you can
+review easily and decide for yourself.
+#+END_QUOTE
+
+* Synopsis
+*Scissors* generates websites from a tree of [[https://www.promptworks.com/textile][Textile]] files.  It does
+not try to deduce any meaning from the structure of that tree
+(i.e. where files are in the directory hierarchy), but can generate a
+blog from a directory of files named a certain way, if enabled.  See
+[[file:doc/examples/singe-blog.rb][this example]] for how that can be done.  Multiple blogs, RSS feed
+generation and copying over static files are supported.
+
+* Dependencies
+The Scissors library depends on the Ruby standard runtime and the
+[[http://redcloth.org/][RedCloth]] library.  See [[file:Gemfile.lock]] for exact versions.
+
+* Usage
+Documentation is TBD as this was just extracted from my own personal
+blog.  But in the meantime the [[file:doc/examples/][example files]] can be used to make a
+working website.
+
+* Contributing
+Please open an issue or mail me a patch.  Document your changes
+accurately and completely, and write nicely formatted, readable,
+elegant, and carefully produced code.
+
+* License
+Copyright (C) 2017-2018  Göktuğ Kayaalp <self@gkayaalp.com>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+* Issues
+** TODO =blog/index.rss.xml= mode shoud be 644, but is 640
+somehow the [[file:Makefile::umask%200022%20&&%20bundle%20exec%20ruby%20build.rb][umask]] does not apply to it.
+
+** TODO Allow arbitrarily-deep breadcrumbs.
+See [[file:lib/scissors.rb::crumbs%20=%20@link.each_filename.to_a]]
+
+** DONE Post sorting fails with multiple posts on the same day
+Resolved using a name =YYYYMMDD_#_slug= where # is an arbitrary number
+converted to integer during runtime.
+
+-----
+
+Given I'll seldom if ever post on the same day, just sorting
+alphabetically on the slugs if dates match might suffice.
+
+Or maybe an optional final component in the file name can be used,
+where in a filename =YYYYMMDD_slug_##.textile=, =##= \ge 1 is a two
+digit zero-padded number that represents posting order.  Absence of
+such part can denote zero.
+
+** TODO Generate a sitemap
+[[file:lib/scissors.rb::def%20generate_pages%20sources_root,%20target_root,%20templates,%20force_regeneration][generate-pages]] should be able to initiate that, given it has a list of
+pages already.
