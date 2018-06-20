@@ -41,7 +41,7 @@ module Scissors
 
       REQUIRED_FRONT_MATTER.each do |m|
         unless @front_matter.include? m
-          raise runtimeerror, "#{@path}: required entry `#{m}' missing in front matter"
+          raise RuntimeError, "#{@path}: required entry `#{m}' missing in front matter"
         end
       end
 
