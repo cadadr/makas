@@ -50,6 +50,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 * Issues
+** TODO Support Scss and Sass
+Automatically convert, if enabled, S*ss files to CSS files during
+build.
+
 ** TODO =blog/index.rss.xml= mode shoud be 644, but is 640
 somehow the [[file:Makefile::umask%200022%20&&%20bundle%20exec%20ruby%20build.rb][umask]] does not apply to it.
 
