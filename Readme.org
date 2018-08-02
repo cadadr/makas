@@ -1,4 +1,5 @@
 #+title: Scissors
+#+category: Scissors
 #+description: Cut your Textile into a nice website.
 #+options: toc:nil
 
