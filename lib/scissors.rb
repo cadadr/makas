@@ -143,6 +143,9 @@ module Scissors
 
     raw.each do |line|
       name, content = line.split /:[[:blank:]]+/
+      unless content
+        raise(RuntimeError, "bad front matter line #{line}")
+      end
       hash[name.strip.downcase.to_sym] = content.strip
     end
 
@@ -157,9 +160,11 @@ module Scissors
   end
 
   # Find the targets where the output files corresponding to each path
-  # should be located.  OUTDIR is the root of the build tree.  If EXT is
-  # provided, change the file name extension of the target to that.  EXT
-  # should have the initial dot in it.
+  # should be located.  OUTDIR is the root of the build tree.  If EXT
+  # is provided, change the file name extension of the target to that.
+  # EXT should have the initial dot in it.  If missing, a dot is
+  # prepended to EXT.  If many dots preced EXT, they are _not_
+  # removed.
   def self.find_targets paths, outdir, ext: nil
     hash = {}
 
@@ -202,15 +207,17 @@ module Scissors
   # of the said template file.
   def self.load_templates template_dir
     hash = {}
-    tmps = Dir.glob(Pathname.new(template_dir) + "*")
+    tmpls = Dir.glob(Pathname.new(template_dir) + "*")
 
-    tmps.each do |tmp|
+    tmpls.each do |tmpl|
       # sub_ext is used to remove the extension.
-      name = Pathname.new(tmp).basename.sub_ext("").to_s.to_sym
-      hash[name] = ERB.new(Pathname.new(tmp).read)
+      name = Pathname.new(tmpl).basename.sub_ext("").to_s.to_sym
+      erb = ERB.new(Pathname.new(tmpl).read)
+      erb.filename = tmpl
+      hash[name] = erb
     end
 
-    annoy "Loaded #{tmps.length} templates from #{template_dir}."
+    annoy "Loaded #{tmpls.length} templates from #{template_dir}."
 
     hash
   end
@@ -253,18 +260,23 @@ module Scissors
   # array of paths to the pages produced.
   def self.generate_pages sources_root, target_root, templates, force_regeneration
     annoy "Generating pages from `#{sources_root}' under `#{target_root}'..."
-    page_sources = collect_pages sources_root
-    mappings = find_targets page_sources, target_root, ext: ".html"
-    if !force_regeneration
-      mappings = drop_up_to_date mappings
+    ret = nil
+    FileUtils.chdir Pathname.new(sources_root).join("..") do
+      sources_root = Pathname.new(sources_root).basename.to_s
+      page_sources = collect_pages sources_root
+      mappings = find_targets page_sources, target_root, ext: ".html"
+      if !force_regeneration
+        mappings = drop_up_to_date mappings
+      end
+      if mappings.empty?
+        return []
+      end
+      pages = mappings.keys.map do |page| load_page page, sources_root end
+      htmls = apply_templates(pages, templates)
+      annoy "Going to write #{htmls.length} pages..."
+      ret = write_pages htmls, mappings
     end
-    if mappings.empty?
-      return []
-    end
-    pages = mappings.keys.map do |page| load_page page, sources_root end
-    htmls = apply_templates(pages, templates)
-    annoy "Going to write #{htmls.length} pages..."
-    write_pages htmls, mappings
+    ret
   end
 
   # Copy the tree under STATIC_ROOT over to TARGET_ROOT.  Return a list
