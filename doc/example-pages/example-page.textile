@@ -1,5 +1,5 @@
 Title: An example page
-Template: page
+Template: basic
 Language: en
 
 h1. What is this?

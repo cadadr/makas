@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="<%= @data[:language] %>">
+  <head>
+    <title><%= @data[:title] %></title>
+</head>
+  <body>
+    <header>
+      <nav id="breadcrumbs">
+        /
+        <a href="/">Home</a>
+        <% if @data[:section] %>
+        /
+        <a href="/<%= @data[:section][:link] %>"><%= @data[:section][:name] %></a>
+        <% end %>
+        /
+        <a href="/<%= @data[:link] %>"><%= @data[:title] %></a>
+      </nav>
+
+      <h1><%= @data[:title] %></h1>
+    </header>
+
+    <section id="content">
+      <%= @data[:content] %>
+    </section>
+
+  </body>
+</html>
