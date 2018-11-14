@@ -17,7 +17,7 @@ review easily and decide for yourself.
 not try to deduce any meaning from the structure of that tree
 (i.e. where files are in the directory hierarchy), but can generate a
 blog from a directory of files named a certain way, if enabled.  See
-[[file:doc/examples/singe-blog.rb][this example]] for how that can be done.  Multiple blogs, RSS feed
+[[file:doc/example-config/scripts/single-blog.rb][this example]] for how that can be done.  Multiple blogs, RSS feed
 generation and copying over static files are supported.
 
 * Dependencies
@@ -26,7 +26,7 @@ The Scissors library depends on the Ruby standard runtime and the
 
 * Usage
 Documentation is TBD as this was just extracted from my own personal
-blog.  But in the meantime the [[file:doc/examples/][example files]] can be used to make a
+blog.  But in the meantime the [[file:doc/][example files]] can be used to make a
 working website.
 
 * Contributing
