@@ -21,6 +21,7 @@ require 'scissors'
 
 class ScissorsTest < Minitest::Test
   def setup
+    @s = Scissors::Builder.new({}, false, false)
     @ex_page_path = "doc/example-pages/example-page.textile"
     @ex_page_dir = File.dirname @ex_page_path
     @ex_page_cnts = File.read @ex_page_path
@@ -28,39 +29,39 @@ class ScissorsTest < Minitest::Test
   end
 
   def test_can_parse_front_matter
-    assert_equal(Scissors.parse_front_matter([]), {})
+    assert_equal(@s.parse_front_matter([]), {})
 
     # At least one space after /KeyName :/
     begin
-      Scissors.parse_front_matter(["x:y"])
+      @s.parse_front_matter(["x:y"])
     rescue RuntimeError => re
       assert_equal(re.to_s, "bad front matter line x:y")
     end
 
-    assert_equal(Scissors.parse_front_matter(["x: y"]), {x: 'y'})
+    assert_equal(@s.parse_front_matter(["x: y"]), {x: 'y'})
   end
 
   def test_page_collection
-    assert_equal(Scissors.collect_pages(@ex_page_dir), [@ex_page_path])
-    assert (Scissors.collect_pages(@ex_page_dir, recursive: false) ==
+    assert_equal(@s.collect_pages(@ex_page_dir), [@ex_page_path])
+    assert (@s.collect_pages(@ex_page_dir, recursive: false) ==
             [@ex_page_path])
-    assert_equal(Scissors.collect_pages("doc", recursive: false), [])
-    assert_equal(Scissors.collect_pages("doc"), [@ex_page_path])
+    assert_equal(@s.collect_pages("doc", recursive: false), [])
+    assert_equal(@s.collect_pages("doc"), [@ex_page_path])
   end
 
   def test_targets
-    ps = Scissors.collect_pages(@ex_page_dir)
+    ps = @s.collect_pages(@ex_page_dir)
 
     # No ext subst
-    ts = Scissors.find_targets(ps, "bob")
+    ts = @s.find_targets(ps, "bob")
     assert_equal(ts[ps[0]].to_s, "bob/example-pages/example-page.textile")
 
     # Ext subst
-    ts = Scissors.find_targets(ps, "bob", ext: "rose")
+    ts = @s.find_targets(ps, "bob", ext: "rose")
     assert_equal(ts[ps[0]].to_s, "bob/example-pages/example-page.rose")
 
     # Weird subst ext is used nevertheless
-    ts = Scissors.find_targets(ps, "bob", ext: "..rose")
+    ts = @s.find_targets(ps, "bob", ext: "..rose")
     assert_equal(ts[ps[0]].to_s, "bob/example-pages/example-page..rose")
   end
 
@@ -71,15 +72,15 @@ class ScissorsTest < Minitest::Test
   #   - source's mtime (per Pathname.new(<source>).stat.mtime) is
   #     greater than that of target
   def test_drop_up_to_date
-    ps = Scissors.collect_pages(@ex_page_dir)
-    ts = Scissors.find_targets(ps, "target")
+    ps = @s.collect_pages(@ex_page_dir)
+    ts = @s.find_targets(ps, "target")
     # Target directory absent, should be stale
-    assert_equal(Scissors.drop_up_to_date(ts), ts)
+    assert_equal(@s.drop_up_to_date(ts), ts)
 
     Dir.mktmpdir do |dir|
       # Dir exists, but no target
-      ts = Scissors.find_targets(ps, dir)
-      assert_equal(Scissors.drop_up_to_date(ts), ts)
+      ts = @s.find_targets(ps, dir)
+      assert_equal(@s.drop_up_to_date(ts), ts)
 
       # Dir exists, has up-to-date target
       f = ts.values[0]
@@ -87,17 +88,17 @@ class ScissorsTest < Minitest::Test
       FileUtils.mkdir(Pathname.new(dir).join(Pathname.new(f).dirname))
       # Create an up-to-date target
       FileUtils.touch [ts.values[0]]
-      assert_equal(Scissors.drop_up_to_date(ts), {})
+      assert_equal(@s.drop_up_to_date(ts), {})
 
       # Update source so that the target becomes staler
       sleep 0.01                 # make sure mtime will be greater
       FileUtils.touch [ts.keys[0]]
-      assert_equal(Scissors.drop_up_to_date(ts), ts)
+      assert_equal(@s.drop_up_to_date(ts), ts)
     end
   end
 
   def test_load_templates
-    t = Scissors.load_templates(@ex_templ_dir)
+    t = @s.load_templates(@ex_templ_dir)
     assert t.has_key?(:basic)
     assert t.has_key?(:rss_example)
     assert (t[:basic].filename ==
@@ -107,28 +108,28 @@ class ScissorsTest < Minitest::Test
 
     # Empty hash if no templates
     Dir.mktmpdir do |dir|
-      assert_equal(Scissors.load_templates(dir), {})
+      assert_equal(@s.load_templates(dir), {})
     end
   end
 
   def test_apply_templates
-    ps = Scissors.collect_pages(@ex_page_dir).map do |p|
-      Scissors.load_page p, @ex_page_dir
+    ps = @s.collect_pages(@ex_page_dir).map do |p|
+      @s.load_page p, @ex_page_dir
     end
-    ts = Scissors.load_templates @ex_templ_dir
+    ts = @s.load_templates @ex_templ_dir
 
     # Raise if template missing
     orig = ps[0].template_name
     ps[0].data[:template] = :nonexistenttemplate
     begin
-      Scissors.apply_templates ps, ts
+      @s.apply_templates ps, ts
     rescue RuntimeError => re
       assert (re.to_s =~ /^Missing template: /)
     end
 
     # Reset
     ps[0].data[:template] = orig
-    applied = Scissors.apply_templates ps, ts
+    applied = @s.apply_templates ps, ts
     assert (applied[ps[0].get_path] =~
             /^<!doctype html>\n<html lang="en">/)
   end
@@ -139,7 +140,7 @@ class ScissorsTest < Minitest::Test
                 "b" => Pathname.new("yfil")}
     Dir.mktmpdir do |dir|
       FileUtils.chdir dir do
-        Scissors.write_pages pages, mappings
+        @s.write_pages pages, mappings
         assert_equal(File.new("xfil").read, "x")
       end
     end
@@ -148,14 +149,14 @@ class ScissorsTest < Minitest::Test
     mappings = {}
     Dir.mktmpdir do |dir|
       FileUtils.chdir dir do
-        Scissors.write_pages pages, mappings
+        @s.write_pages pages, mappings
         assert_equal(Dir.new('.').entries.length, 2)
       end
     end
   end
 
   def test_can_parse_page
-    page = Scissors.load_page @ex_page_path, @ex_page_dir
+    page = @s.load_page @ex_page_path, @ex_page_dir
 
     assert page.data.has_key? :title
     assert page.data.has_key? :template
@@ -183,13 +184,13 @@ class ScissorsTest < Minitest::Test
   # The link's extension should become HTML and its path should be
   # relative to sources_root.
   def test_ex_page_link
-    page = Scissors.load_page @ex_page_path, @ex_page_dir
+    page = @s.load_page @ex_page_path, @ex_page_dir
     assert_equal(page.data[:link].to_s, 'example-page.html')
   end
 
   def test_breadcrumbs_single_level
     dir = "doc"
-    page = Scissors.load_page @ex_page_path, dir
+    page = @s.load_page @ex_page_path, dir
     assert page.data.has_key? :section
     s = page.data[:section]
     assert_equal(s[:name], "example-pages")
@@ -203,13 +204,13 @@ class ScissorsTest < Minitest::Test
   end
 
   # XXX: So apparently the current directory needs to be
-  # static_root/.. in order for Scissors.generate_pages to function
+  # static_root/.. in order for @s.generate_pages to function
   # correctly.  That's not good, and needs be fixed when the test
   # suite is complete enough.
   def test_page_generation
     Dir.mktmpdir do |dir|
-      templates = Scissors.load_templates @ex_templ_dir
-      ps = Scissors.generate_pages @ex_page_dir, dir, templates, false
+      templates = @s.load_templates @ex_templ_dir
+      ps = @s.generate_pages @ex_page_dir, dir, templates, false
       assert_equal(ps.length, 1)
       assert_equal(ps[0].basename.to_s, "example-page.html")
       assert(Pathname.new(dir).join("example-page.html").exist?,
@@ -220,9 +221,9 @@ class ScissorsTest < Minitest::Test
     Dir.mktmpdir do |dir|
       FileUtils.chdir "doc" do
         templates =
-          Scissors.load_templates Pathname.new(@ex_templ_dir)
+          @s.load_templates Pathname.new(@ex_templ_dir)
                                     .basename.to_s
-        ps = Scissors.generate_pages(
+        ps = @s.generate_pages(
           Pathname.new(@ex_page_dir).basename.to_s,
           dir, templates, false)
         assert_equal(ps.length, 1)
