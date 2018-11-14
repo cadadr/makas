@@ -61,20 +61,6 @@ somehow the [[file:Makefile::umask%200022%20&&%20bundle%20exec%20ruby%20build.rb
 ** TODO Allow arbitrarily-deep breadcrumbs.
 See [[file:lib/scissors.rb::crumbs%20=%20@link.each_filename.to_a]]
 
-** DONE Post sorting fails with multiple posts on the same day
-Resolved using a name =YYYYMMDD_#_slug= where # is an arbitrary number
-converted to integer during runtime.
-
------
-
-Given I'll seldom if ever post on the same day, just sorting
-alphabetically on the slugs if dates match might suffice.
-
-Or maybe an optional final component in the file name can be used,
-where in a filename =YYYYMMDD_slug_##.textile=, =##= \ge 1 is a two
-digit zero-padded number that represents posting order.  Absence of
-such part can denote zero.
-
 ** TODO Generate a sitemap
 [[file:lib/scissors.rb::def%20generate_pages%20sources_root,%20target_root,%20templates,%20force_regeneration][generate-pages]] should be able to initiate that, given it has a list of
 pages already.
