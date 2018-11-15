@@ -114,7 +114,7 @@ module Scissors
       name = nil
 
       if basename.include? "_"
-        a, b, c = basename.split /_/
+        a, b, c = basename.split(/_/)
         if c
           date, name, order_in_day = a, c, b.to_i
         else
@@ -150,7 +150,7 @@ module Scissors
       hash = {}
 
       raw.each do |line|
-        name, content = line.split /:[[:blank:]]+/
+        name, content = line.split(/:[[:blank:]]+/)
         unless content
           raise(RuntimeError, "bad front matter line #{line}")
         end
@@ -179,7 +179,7 @@ module Scissors
       paths.each do |p|
         path = Pathname.new p
         parts = path.each_filename.to_a[1..-1]
-        target = Pathname.new(outdir).join *parts
+        target = Pathname.new(outdir).join(*parts)
         if ext
           ext = "." + ext if !ext.start_with? "."
           hash[p] = target.sub_ext ext
