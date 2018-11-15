@@ -91,7 +91,7 @@ class ScissorsTest < Minitest::Test
       assert_equal(@s.drop_up_to_date(ts), {})
 
       # Update source so that the target becomes staler
-      sleep 0.01                 # make sure mtime will be greater
+      sleep 0.1                  # make sure mtime will be greater
       FileUtils.touch [ts.keys[0]]
       assert_equal(@s.drop_up_to_date(ts), ts)
     end
