@@ -24,3 +24,8 @@ end
 
 desc "Run tests"
 task :default => :test
+
+desc "(Re)generate TAGS"
+task :tags do
+  sh "etags", *(%x(find . -name "*.rb").split)
+end
