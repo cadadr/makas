@@ -124,7 +124,7 @@ module Scissors
         name = basename
       end
 
-      File.open input_file do |f|
+      File.open input_file, encoding: 'UTF-8' do |f|
         loop do
           line = f.readline
           break if line =~ /^\f$/
@@ -220,7 +220,7 @@ module Scissors
       tmpls.each do |tmpl|
         # sub_ext is used to remove the extension.
         name = Pathname.new(tmpl).basename.sub_ext("").to_s.to_sym
-        erb = ERB.new(Pathname.new(tmpl).read)
+        erb = ERB.new(Pathname.new(tmpl).read(encoding: "UTF-8"))
         erb.filename = tmpl
         hash[name] = erb
       end
