@@ -1,4 +1,4 @@
-# coding: utf-8
+# encoding: utf-8
 # scissors.rb --- Library for building websites from a tree of Textile files.
 
 # Copyright (C) 2017-2018  Göktuğ Kayaalp <self@gkayaalp.com>

@@ -1,4 +1,4 @@
-# coding: utf-8
+# encoding: utf-8
 # test_scissors.rb --- Testing the Scissors library.
 
 # Copyright (C) 2017-2018  Göktuğ Kayaalp <self@gkayaalp.com>
