@@ -1,0 +1,6 @@
+before_script:
+  - bundle install --jobs $(nproc)
+
+tests:
+  script:
+    - rake test
