@@ -2,12 +2,14 @@ GEM
   remote: https://rubygems.org/
   specs:
     RedCloth (4.3.2)
+    minitest (5.11.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   RedCloth
+  minitest
 
 BUNDLED WITH
    1.13.6
