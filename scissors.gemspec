@@ -24,6 +24,8 @@ Gem::Specification.new do |s|
   s.description = <<EOT
 Library for building websites from a tree of Textile files.
 
+Cut your Textile into a nice website!
+
 Scissors generates websites from a tree of Textile files.  It does not
 try to deduce any meaning from the structure of that tree (i.e. where
 files are in the directory hierarchy), but can generate a blog from a
@@ -33,7 +35,7 @@ RSS feed generation and copying over static files are supported.
 EOT
   s.authors     = ["Göktuğ Kayaalp"]
   s.email       = 'self@gkayaalp.com'
-  s.files       = ["lib/scissors.rb"]
+  s.files       = ["lib/scissors.rb", "Readme.org", "COPYING"]
   s.homepage    = 'https://www.gkayaalp.com/src.html#scissors'
-  s.license     = 'GPLv3'
+  s.license     = 'GPL-3.0'
 end
