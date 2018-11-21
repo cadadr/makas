@@ -18,8 +18,8 @@
 
 Gem::Specification.new do |s|
   s.name        = 'scissors'
-  s.version     = '0.0.0'
-  s.date        = '2018-06-03'
+  s.version     = '0.1.0-alpha'
+  s.date        = '2018-11-21'
   s.summary     = "Library for building websites from a tree of Textile files."
   s.description = <<EOT
 Library for building websites from a tree of Textile files.
