@@ -51,6 +51,24 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 * Issues
+** TODO When copying static files, exception if target does not exist and >= 2 levels
+Seemingly [[file:lib/makas.rb::target.delete%20if%20target.exist?][this]]
+
+:        Dir.mkdir target_dir if !target_dir.exist?
+
+has to be modified.
+
+#+BEGIN_EXAMPLE
+/home/g/co/makas/lib/makas.rb:301:in `mkdir': No such file or directory @ dir_s_mkdir - output/.well-known/acme-challenge (Errno::ENOENT)
+	from /home/g/co/makas/lib/makas.rb:301:in `block in copy_static_files'
+	from /home/g/co/makas/lib/makas.rb:299:in `each'
+	from /home/g/co/makas/lib/makas.rb:299:in `map'
+	from /home/g/co/makas/lib/makas.rb:299:in `copy_static_files'
+	from /home/g/co/makas/lib/makas.rb:420:in `build_site'
+	from /home/g/co/makas/lib/makas.rb:433:in `build_site'
+	from ./scripts/build.rb:27:in `<main>'
+#+END_EXAMPLE
+
 ** TODO Support Scss and Sass
 Automatically convert, if enabled, S*ss files to CSS files during
 build.
