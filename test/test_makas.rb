@@ -1,5 +1,5 @@
 # encoding: utf-8
-# test_scissors.rb --- Testing the Scissors library.
+# test_makas.rb --- Testing the Makas library.
 
 # Copyright (C) 2017-2018  Göktuğ Kayaalp <self@gkayaalp.com>
 
@@ -17,11 +17,11 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 require 'minitest/autorun'
-require 'scissors'
+require 'makas'
 
-class ScissorsTest < Minitest::Test
+class MakasTest < Minitest::Test
   def setup
-    @s = Scissors::Builder.new({}, false, false)
+    @s = Makas::Builder.new({}, false, false)
     @ex_page_path = "doc/example-pages/example-page.textile"
     @ex_page_dir = File.dirname @ex_page_path
     @ex_page_cnts = File.read @ex_page_path
@@ -166,7 +166,7 @@ class ScissorsTest < Minitest::Test
 
   def test_ensure_required_front_matter
     begin
-      Scissors::Page.new "", "", "", {}, {}
+      Makas::Page.new "", "", "", {}, {}
     rescue RuntimeError => re
       assert (re.to_s =~ /required entry/)
     end
@@ -174,8 +174,8 @@ class ScissorsTest < Minitest::Test
 
   def test_disallow_modifying_reserved_attributes
     begin
-      Scissors::Page.new "", "", "", {date: 10},
-                         {title: "", template: "", date: 20}
+      Makas::Page.new "", "", "", {date: 10},
+                      {title: "", template: "", date: 20}
     rescue RuntimeError => re
       assert_equal(re.to_s, "tried to modify reserved attribute")
     end

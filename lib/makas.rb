@@ -1,5 +1,5 @@
 # encoding: utf-8
-# scissors.rb --- Library for building websites from a tree of Textile files.
+# makas.rb --- Library for building websites from a tree of Textile files.
 
 # Copyright (C) 2017-2018  Göktuğ Kayaalp <self@gkayaalp.com>
 #
@@ -22,7 +22,7 @@ require 'fileutils'
 require 'pathname'
 require 'redcloth'
 
-module Scissors
+module Makas
 
   class Page
     RESERVED_ATTRIBUTES = [:date, :name]

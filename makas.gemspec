@@ -1,5 +1,5 @@
 # coding: utf-8
-# Gemspec for Scissors
+# Gemspec for Makas
 
 # Copyright (C) 2017-2018  Göktuğ Kayaalp <self@gkayaalp.com>
 
@@ -17,7 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Gem::Specification.new do |s|
-  s.name        = 'scissors'
+  s.name        = 'makas'
   s.version     = '0.1.0-alpha'
   s.date        = '2018-11-21'
   s.summary     = "Library for building websites from a tree of Textile files."
@@ -26,7 +26,7 @@ Library for building websites from a tree of Textile files.
 
 Cut your Textile into a nice website!
 
-Scissors generates websites from a tree of Textile files.  It does not
+Makas generates websites from a tree of Textile files.  It does not
 try to deduce any meaning from the structure of that tree (i.e. where
 files are in the directory hierarchy), but can generate a blog from a
 directory of files named a certain way, if enabled.  See
@@ -35,7 +35,7 @@ RSS feed generation and copying over static files are supported.
 EOT
   s.authors     = ["Göktuğ Kayaalp"]
   s.email       = 'self@gkayaalp.com'
-  s.files       = ["lib/scissors.rb", "Readme.org", "COPYING"]
-  s.homepage    = 'https://www.gkayaalp.com/src.html#scissors'
+  s.files       = ["lib/makas.rb", "Readme.org", "COPYING"]
+  s.homepage    = 'https://www.gkayaalp.com/src.html#makas'
   s.license     = 'GPL-3.0'
 end

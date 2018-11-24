@@ -1,5 +1,5 @@
 # coding: utf-8
-# single-blog.rb --- Scissors example website with a blog.
+# single-blog.rb --- Makas example website with a blog.
 
 # Copyright (C) 2017-2018  Göktuğ Kayaalp <self@gkayaalp.com>
 
@@ -17,7 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-require "scissors"
+require "makas"
 
 site_opts = {
   # The website's name.
@@ -84,4 +84,4 @@ f = ENV["F"] == "yes"
 
 # The build_site function will generate the output files, the blog
 # indexes and the RSS feeds.
-Scissors.build_site site_opts, force_regeneration: f, verbose: v
+Makas.build_site site_opts, force_regeneration: f, verbose: v

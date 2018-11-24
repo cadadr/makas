@@ -1,5 +1,5 @@
-#+title: Scissors
-#+category: Scissors
+#+title: Makas
+#+category: Makas
 #+description: Cut your Textile into a nice website.
 #+options: toc:nil
 
@@ -13,7 +13,7 @@ review easily and decide for yourself.
 #+END_QUOTE
 
 * Synopsis
-*Scissors* generates websites from a tree of [[https://www.promptworks.com/textile][Textile]] files.  It does
+*Makas* generates websites from a tree of [[https://www.promptworks.com/textile][Textile]] files.  It does
 not try to deduce any meaning from the structure of that tree
 (i.e. where files are in the directory hierarchy), but can generate a
 blog from a directory of files named a certain way, if enabled.  See
@@ -21,7 +21,7 @@ blog from a directory of files named a certain way, if enabled.  See
 generation and copying over static files are supported.
 
 * Dependencies
-The Scissors library depends on the Ruby standard runtime and the
+The Makas library depends on the Ruby standard runtime and the
 [[http://redcloth.org/][RedCloth]] library.  See [[file:Gemfile.lock]] for exact versions.
 
 * Usage
@@ -59,8 +59,8 @@ build.
 somehow the [[file:Makefile::umask%200022%20&&%20bundle%20exec%20ruby%20build.rb][umask]] does not apply to it.
 
 ** TODO Allow arbitrarily-deep breadcrumbs.
-See [[file:lib/scissors.rb::crumbs%20=%20@link.each_filename.to_a]]
+See [[file:lib/makas.rb::crumbs%20=%20@link.each_filename.to_a]]
 
 ** TODO Generate a sitemap
-[[file:lib/scissors.rb::def%20generate_pages%20sources_root,%20target_root,%20templates,%20force_regeneration][generate-pages]] should be able to initiate that, given it has a list of
+[[file:lib/makas.rb::def%20generate_pages%20sources_root,%20target_root,%20templates,%20force_regeneration][generate-pages]] should be able to initiate that, given it has a list of
 pages already.

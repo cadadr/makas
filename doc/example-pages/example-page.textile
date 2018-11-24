@@ -6,6 +6,6 @@ h1. What is this?
 
 This is an example page.  It consists of two main parts: the header, and the body.  The two are separated using a ‘form feed’, ASCII / UTF8 character 0xC, decimal 12.  In Emacs you can enter it as @C-q C-l@.  The header is comprised of key-value pairs utilised when generating the page.  The body contains arbitrary text in Textile markup.
 
-The meaning of the headers depend on the theme, i.e. the collection of templates.  Scissors uses the Template header to assign a template to a page.
+The meaning of the headers depend on the theme, i.e. the collection of templates.  Makas uses the Template header to assign a template to a page.
 
 This example page is used for documentation and testing.

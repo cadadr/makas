@@ -1,5 +1,5 @@
 # coding: utf-8
-# Rakefile for Scissors
+# Rakefile for Makas
 
 # Copyright (C) 2017-2018  Göktuğ Kayaalp <self@gkayaalp.com>
 
@@ -32,5 +32,5 @@ end
 
 desc "Build gem"
 task :gem do
-  sh "gem", "build", "scissors.gemspec"
+  sh "gem", "build", "makas.gemspec"
 end

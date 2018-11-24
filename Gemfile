@@ -1,5 +1,5 @@
 # coding: utf-8
-# Gemfile for Scissors
+# Gemfile for Makas
 
 # Copyright (C) 2017-2018  Göktuğ Kayaalp <self@gkayaalp.com>
 

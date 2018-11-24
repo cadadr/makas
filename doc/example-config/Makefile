@@ -1,16 +1,16 @@
-# Makefile --- example makefile for scissors
+# Makefile --- example makefile for makas
 
 # N.B.: THIS CONFIGURATION IS AN EXAMPLE AND MAY NOT WORK AS IS.  COPY
 # OVER AND EDIT THESE FILES AS YOU NEED TO MAKE THEM USEFUL / USABLE !
 
-# This is an example Makefile for a website using Scissors.  This
-# includes a setup for controlling some aspects of Scissors using
+# This is an example Makefile for a website using Makas.  This
+# includes a setup for controlling some aspects of Makas using
 # environment variables, and a couple convenience scripts.  This
 # makefile is the entry point to all of this.  This file is
 # _extensively_ documented in comments, so make sure you read them,
 # especially if you are new to shell scripting and make(1).
 
-# These variables are used to control whether or not Scissors prints
+# These variables are used to control whether or not Makas prints
 # debugging information, and whether or not up-to-date files are
 # skipped when building.  The syntax to set these variables are as
 # follows:
@@ -38,7 +38,7 @@
 # The "V" make variable determines whether or not debug messages are
 # printed.  Setting it to "yes" will cause the messages to be printed.
 # It defaults to "no", i.e. not printing anything except errors.
-# Might be useful when debugging or patching Scissors.
+# Might be useful when debugging or patching Makas.
 export V:=no			# verbose?
 
 # The "F" variable, when set to "yes" forces a complete page
@@ -52,21 +52,21 @@ export F:=no			# force regeneration?
 
 # For both variables, the "export" command means that the subprocesses
 # started in this Makefile can see these variables.  This is how we
-# communicate these settings to the Scissors library itself, see the
+# communicate these settings to the Makas library itself, see the
 # "build" rule below for more details.
 
 #                                *
 #                              *   *
 
-# This is the Ruby command.  If you installed Scissors as a gem,
-# remove the "-I..." part.  If you downloaded Scissors manually,
+# This is the Ruby command.  If you installed Makas as a gem,
+# remove the "-I..." part.  If you downloaded Makas manually,
 # update the argument to the "-I" option to point to the "lib"
-# subdirectory of your copy of Scissors.  Another option is to modify
+# subdirectory of your copy of Makas.  Another option is to modify
 # Ruby's search path itself, but that's rather tedious, and not
 # recommended.  If you can, download using gem or bundler, as it will
 # automatically install the dependencies.  Otherwise, make sure you
 # run "bundle" in the repository root.
-RUBY:=ruby -I $(HOME)/path/to/scissors/lib
+RUBY:=ruby -I $(HOME)/path/to/makas/lib
 
 # This declaration tells make(1) that these targets do not generate
 # files themselves.  These are indeed essentially shortcuts to other
@@ -78,13 +78,13 @@ RUBY:=ruby -I $(HOME)/path/to/scissors/lib
 # target, and it's essentially an alias to "build".
 all: build
 
-# This rule is what runs the Scissors library, or more precisely, the
+# This rule is what runs the Makas library, or more precisely, the
 # configuration script that uses it.  Check out the script, it is
 # extensively commented, each configuration option is documented with
 # due detail.
 #
-# Scissors is a library.  We write a small script where we define a
-# hashmap that constitutes the configuration that the Scissors library
+# Makas is a library.  We write a small script where we define a
+# hashmap that constitutes the configuration that the Makas library
 # uses in order to generate the website.  The environment of this
 # script will include the V and F variables we set above.
 build:
@@ -112,7 +112,7 @@ server:
 # The following two scripts are interactive utilities to help create
 # posts and pages.  They let you fill out some information like
 # page/post title, language, &c; then create a page/post with an
-# appropriate name (especially for blog posts Scissors utilises a
+# appropriate name (especially for blog posts Makas utilises a
 # certain file name structure); and finally opens it in your $EDITOR.
 post:
 	sh ./scripts/post.sh
@@ -125,7 +125,7 @@ page:
 
 # All of the scripts and configurations above are concise, simple and
 # straightforward, so you’re encouraged to mold them to your needs.
-# Scissors started as out a script that was part of my own blog, so it
+# Makas started as out a script that was part of my own blog, so it
 # is a bit too opininated maybe, but it's also meant to be very
 # flexible and intuitive.  The basic idea is that we transform Textile
 # to HTML, copy over static files, and optionally can use certain
@@ -133,7 +133,7 @@ page:
 # more complex things.  That is, for example, our approach to
 # blogging: blog posts are just normal pages in an arbitrary
 # directory, but with file names that follow a convention.  Then, in
-# the configuration script, we tell Scissors to treat that directory
+# the configuration script, we tell Makas to treat that directory
 # as a blog.  All it does then is to inject an "index.textile" file
 # and an "index.rss.xml" file right before processing page sources,
 # using templates we configured.  Then these generated files go
@@ -142,13 +142,13 @@ page:
 #                                *
 #                              *   *
 
-# Scissors is one of many static site generators.  It takes
+# Makas is one of many static site generators.  It takes
 # inspiration from XMonad in that the configuration is done via
 # writing a "main" function, it's distinguishing feature is to be a
 # library by default.  It's not meant to take over your process, but
 # to become a part of it.  Indeed, here we see it play its role in a
 # system that is controlled by make rules, and implemented using a
-# Ruby script and a few POSIX Shell scripts.  There is no "scissors"
+# Ruby script and a few POSIX Shell scripts.  There is no "makas"
 # command, though if someone felt like it, they can make one.  There
 # might even exist many such frontends.
 
@@ -157,16 +157,16 @@ page:
 # project.  We want our configuration to be simple, but when we need
 # complexity, the whole range of possibilites the Ruby language and
 # the ecosystem brings to the table is at our fingertips.  I plan to
-# develop Scissors with genericity and extensibility in mind, so
+# develop Makas with genericity and extensibility in mind, so
 # that'll only become easier in the future.
 
 # If you made it to here in this Makefile, that's great, you did not
 # only learn how to use this Makefile and what's what here, but also
-# how the various parts of this file and Scissors in general work
-# together.  If you decide to use Scissors for your website, that's
+# how the various parts of this file and Makas in general work
+# together.  If you decide to use Makas for your website, that's
 # great!  I always welcome bug reports, suggestions for improvements,
 # and patches; see:
 
-#   https://www.gkayaalp.com/src.html#scissors
+#   https://www.gkayaalp.com/src.html#makas
 
 # Happy hacking!
