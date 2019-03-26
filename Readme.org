@@ -68,7 +68,7 @@ Possibly has something to do with the sleep in that test method.
 
 See: https://gitlab.com/cadadr/makas/issues/1
 
-** TODO When copying static files, exception if target does not exist and >= 2 levels
+** DONE When copying static files, exception if target does not exist and >= 2 levels
 Seemingly [[file:lib/makas.rb::target.delete%20if%20target.exist?][this]]
 
 :        Dir.mkdir target_dir if !target_dir.exist?
