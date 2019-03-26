@@ -1,60 +1,59 @@
 
-lib/scissors.rb,1162
-module Scissors25,886
-  class Page27,903
-    RESERVED_ATTRIBUTES 28,916
-    REQUIRED_FRONT_MATTER 29,957
-    attr_accessor :datadata31,1006
-    attr_accessor :datadata=31,1006
-    def initialize 33,1031
-    def template_name;67,2094
-    def get_binding;69,2146
-    def get_path;70,2187
-    def to_s;71,2220
-    def inspect;72,2257
-  class BlogPage75,2290
-    attr_accessor :datadata76,2307
-    attr_accessor :datadata=76,2307
-    def initialize 78,2332
-    def get_binding;88,2713
-    def to_s;89,2754
-    def inspect;90,2798
-  class Builder93,2831
-    def initialize 97,2872
-    def annoy 103,3042
-    def load_page 109,3192
-    def parse_front_matter 149,4407
-    def collect_pages 165,4843
-    def find_targets 176,5355
-    def drop_up_to_date 197,5933
-    def load_templates 216,6468
-    def apply_templates 235,7052
-    def write_pages 252,7525
-    def generate_pages 269,8090
-    def copy_static_files 294,9164
-    def copy_feeds 314,10015
-    def collect_blog_posts 331,10654
-    def write_blog 362,11690
-    def generate_blog_page 378,12153
-    def build_site398,12974
-  def self.build_site build_site431,13967
+lib/makas.rb,1159
+module Makas25,883
+  class Page27,897
+    RESERVED_ATTRIBUTES 28,910
+    REQUIRED_FRONT_MATTER 29,951
+    attr_accessor :datadata31,1000
+    attr_accessor :datadata=31,1000
+    def initialize 33,1025
+    def template_name;67,2088
+    def get_binding;69,2140
+    def get_path;70,2181
+    def to_s;71,2214
+    def inspect;72,2251
+  class BlogPage75,2284
+    attr_accessor :datadata76,2301
+    attr_accessor :datadata=76,2301
+    def initialize 78,2326
+    def get_binding;88,2707
+    def to_s;89,2748
+    def inspect;90,2792
+  class Builder93,2825
+    def initialize 97,2866
+    def annoy 103,3036
+    def load_page 109,3186
+    def parse_front_matter 149,4421
+    def collect_pages 165,4858
+    def find_targets 176,5370
+    def drop_up_to_date 197,5949
+    def load_templates 216,6484
+    def apply_templates 235,7087
+    def write_pages 252,7560
+    def generate_pages 269,8133
+    def copy_static_files 294,9207
+    def copy_feeds 314,10066
+    def collect_blog_posts 331,10713
+    def write_blog 362,11749
+    def generate_blog_page 378,12220
+    def build_site405,13334
+  def self.build_site build_site438,14327
 
-test/test_scissors.rb,593
-class ScissorsTest 22,817
-  def setup23,853
-  def test_can_parse_front_matter31,1116
-  def test_page_collection44,1452
-  def test_targets52,1768
-  def test_drop_up_to_date74,2553
-  def test_load_templates100,3405
-  def test_apply_templates115,3869
-  def test_write_pages137,4454
-  def test_can_parse_page158,5001
-  def test_ensure_required_front_matter167,5255
-  def test_disallow_modifying_reserved_attributes175,5437
-  def test_ex_page_link186,5815
-  def test_breadcrumbs_single_level191,5959
-  def test_breadcrumbs_multiple_levels199,6172
-  def test_page_generation210,6585
-
-doc/example-config/scripts/single-blog.rb,0
+test/test_makas.rb,612
+def gitlab_ci?22,808
+class MakasTest 26,855
+  def setup27,888
+  def test_can_parse_front_matter35,1148
+  def test_page_collection48,1484
+  def test_targets56,1800
+  def test_drop_up_to_date78,2585
+  def test_load_templates104,3439
+  def test_apply_templates119,3903
+  def test_write_pages141,4488
+  def test_can_parse_page162,5035
+  def test_ensure_required_front_matter171,5289
+  def test_disallow_modifying_reserved_attributes179,5468
+  def test_ex_page_link190,5840
+  def test_breadcrumbs_single_level195,5984
+  def test_breadcrumbs_multiple_levels203,6197
+  def test_page_generation214,6610
