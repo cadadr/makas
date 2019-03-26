@@ -90,8 +90,11 @@ has to be modified.
 Automatically convert, if enabled, S*ss files to CSS files during
 build.
 
-** TODO =blog/index.rss.xml= mode shoud be 644, but is 640
-somehow the [[file:Makefile::umask%200022%20&&%20bundle%20exec%20ruby%20build.rb][umask]] does not apply to it.
+** DONE =blog/index.rss.xml= mode shoud be 644, but is 640
++somehow the [[file:Makefile::umask%200022%20&&%20bundle%20exec%20ruby%20build.rb][umask]] does not apply to it.+
+
+Cannot reproduce anymore, after removing generated files from my
+blog’s =pages/= tree.
 
 ** TODO Allow arbitrarily-deep breadcrumbs.
 See [[file:lib/makas.rb::crumbs%20=%20@link.each_filename.to_a]]
