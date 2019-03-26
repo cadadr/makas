@@ -35,7 +35,7 @@ accurately and completely, and write nicely formatted, readable,
 elegant, and carefully produced code.
 
 * License
-Copyright (C) 2017-2018  Göktuğ Kayaalp <self@gkayaalp.com>
+Copyright (C) 2017-2019  Göktuğ Kayaalp <self@gkayaalp.com>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -51,7 +51,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 * Issues
-** TODO =ScissorsTest#test_drop_up_to_date= fails on Gitlab CI
+** DONE =ScissorsTest#test_drop_up_to_date= fails on Gitlab CI
 Job #121015785 failed for 18588736:
 
 #+BEGIN_EXAMPLE
