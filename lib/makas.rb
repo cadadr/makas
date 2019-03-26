@@ -1,7 +1,7 @@
 # encoding: utf-8
 # makas.rb --- Library for building websites from a tree of Textile files.
 
-# Copyright (C) 2017-2018  Göktuğ Kayaalp <self@gkayaalp.com>
+# Copyright (C) 2017-2019  Göktuğ Kayaalp <self@gkayaalp.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -253,7 +253,7 @@ module Makas
       mappings.map do |source, target|
         html = pages[source]
         d = target.dirname
-        Dir.mkdir d unless d.exist?
+        FileUtils.mkdir_p d unless d.exist?
         File.open(target, "w+") do |file|
           file.write html
         end
@@ -298,7 +298,7 @@ module Makas
       annoy "Going to copy #{stale_mappings.length} files..."
       stale_mappings.map do |source, target|
         target_dir = target.dirname
-        Dir.mkdir target_dir if !target_dir.exist?
+        FileUtils.mkdir_p target_dir if !target_dir.exist?
         target.delete if target.exist?
         FileUtils.cp source, target
         annoy "Copied `#{source}' -> `#{target}'."
@@ -318,7 +318,7 @@ module Makas
       stale_mappings = drop_up_to_date mappings
       stale_mappings.map do |source, target|
         target_dir = target.dirname
-        Dir.mkdir target_dir if !target_dir.exist?
+        FileUtils.mkdir_p target_dir if !target_dir.exist?
         target.delete if target.exist?
         FileUtils.cp source, target
         annoy "Copied `#{source}' -> `#{target}'."
@@ -364,7 +364,7 @@ module Makas
 
       target = Pathname.new target_file
       d = target.dirname
-      Dir.mkdir d unless d.exist?
+      FileUtils.mkdir_p d unless d.exist?
       File.open(target, "w+") do |file|
         file.write blog_text
       end
