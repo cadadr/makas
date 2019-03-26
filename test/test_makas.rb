@@ -1,7 +1,7 @@
 # encoding: utf-8
 # test_makas.rb --- Testing the Makas library.
 
-# Copyright (C) 2017-2018  Göktuğ Kayaalp <self@gkayaalp.com>
+# Copyright (C) 2017-2019  Göktuğ Kayaalp <self@gkayaalp.com>
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,6 +18,10 @@
 
 require 'minitest/autorun'
 require 'makas'
+
+def gitlab_ci?
+  ENV.has_key? 'GITLAB_CI'
+end
 
 class MakasTest < Minitest::Test
   def setup
@@ -91,7 +95,7 @@ class MakasTest < Minitest::Test
       assert_equal(@s.drop_up_to_date(ts), {})
 
       # Update source so that the target becomes staler
-      sleep 0.1                  # make sure mtime will be greater
+      sleep (gitlab_ci? ? 1 : 0.1) # make sure mtime will be greater
       FileUtils.touch [ts.keys[0]]
       assert_equal(@s.drop_up_to_date(ts), ts)
     end
