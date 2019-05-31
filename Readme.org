@@ -50,14 +50,3 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-* Issues
-** TODO Support Scss and Sass
-Automatically convert, if enabled, S*ss files to CSS files during
-build.
-
-** TODO Allow arbitrarily-deep breadcrumbs.
-See [[file:lib/makas.rb::crumbs%20=%20@link.each_filename.to_a]]
-
-** TODO Generate a sitemap
-[[file:lib/makas.rb::def%20generate_pages%20sources_root,%20target_root,%20templates,%20force_regeneration][generate-pages]] should be able to initiate that, given it has a list of
-pages already.
